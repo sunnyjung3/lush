@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <style>
+       body{
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #c4c3ca;
+            background-color: #eaeaea;
+            overflow-x: hidden;
+            transition: all 300ms linear;
+            height: 100vh;
+            cursor:none;
+        }
+        .cursor,
+        .cursor2,
+        .cursor3{
+            position: fixed;
+            border-radius: 50%;	
+            transform: translateX(-50%) translateY(-50%);
+            pointer-events: none;
+            left: -100px;
+            top: 50%;
+            /* mix-blend-mode: difference; */
+            transition: all 200ms linear;
+        }
+        .cursor{
+            background-color: #fff;
+            height: 0;
+            width: 0;
+            z-index: 99999;
+        }
+        .cursor2, .cursor3{
+            height: 36px;
+            width: 36px;
+            z-index:99998;
+            transition:all 0.2s ease-out
+        }
+        .cursor2.hover,
+        .cursor3.hover{
+            transform:scale(2) translateX(-25%) translateY(-25%);
+            border:none
+        }
+        .cursor2{
+            border: 2px solid #fff;
+            box-shadow: 0 0 22px rgba(255, 255, 255, 0.6);
+        }
+        .cursor2.hover{
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+        }
+
+
+        .test { width: 200px; height: 100px; border:3px solid yellow;  position: absolute; top:100px; left: 30%; cursor:none;} 
+        .test2 { width: 200px; height: 100px; border:3px solid yellow;  position: absolute; top:300px; left: 60%; cursor:none;} 
+        </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).mousemove(function(e) {
+            $('#cursor, #cursor2').css({
+                left: e.pageX, top: e.pageY
+            });
+
+            setTimeout(function() {
+            $('#cursor3').css({
+                left: e.pageX, top: e.pageY
+                });
+            }, 50);
+            
+            for (var r = $(".hover-target"), a = r.length - 1; a >= 0; a--) {
+                o(r[a])
+            }
+
+            function o(t) {
+                t.addEventListener("mouseover", n), t.addEventListener("mouseout", s)
+            }
+
+
+            function n(t) {
+                $("#cursor, #cursor2").addClass("hover");
+            }
+            function s(t) {
+                $("#cursor, #cursor2").removeClass("hover");
+            }
+
+            
+        });
+    </script>
+
+</head>
+<body>
+    <div class="test hover-target" >링크영역에 올리면~?</div>
+
+    <div class="test2 hover-target" >링크영역에 올리면~?111</div>
+
+	<div class="cursor" id="cursor"></div>
+	<div class="cursor2" id="cursor2"></div>
+	<div class="cursor3" id="cursor3"></div>
+    
+</body>
+</html>
